@@ -2,17 +2,18 @@ import pygame as pg
 import os
 import random
 
+
 # Criação das constantes
 TELA_LARGURA = 500
 TELA_ALTURA = 800
 
-IMAGEM_CANO = pg.transform.scale2x(pg.image.load(os.path.join('assets', 'pipe.png')))
-IMAGEM_CHAO = pg.transform.scale2x(pg.image.load(os.path.join('assets', 'base.png')))
-IMAGEM_FUNDO = pg.transform.scale2x(pg.image.load(os.path.join('assets', 'bg.png')))
+IMAGEM_CANO = pg.transform.scale2x(pg.image.load(os.path.join("C:\\Users\\u23505\\Documents\\GitHub\\pygame-estudos\\flappy-bird\\assets\\pipe.png")))
+IMAGEM_CHAO = pg.transform.scale2x(pg.image.load(os.path.join("C:\\Users\\u23505\\Documents\\GitHub\\pygame-estudos\\flappy-bird\\assets\\base.png")))
+IMAGEM_FUNDO = pg.transform.scale2x(pg.image.load(os.path.join("C:\\Users\\u23505\\Documents\\GitHub\\pygame-estudos\\flappy-bird\\assets\\bg.png")))
 IMAGENS_PASSARO = [
-    pg.transform.scale2x(pg.image.load(os.path.join('assets', 'bird1.png'))),
-    pg.transform.scale2x(pg.image.load(os.path.join('assets', 'bird2.png'))),
-    pg.transform.scale2x(pg.image.load(os.path.join('assets', 'bird3.png')))
+    pg.transform.scale2x(pg.image.load(os.path.join("C:\\Users\\u23505\\Documents\\GitHub\\pygame-estudos\\flappy-bird\\assets\\bird1.png"))),
+    pg.transform.scale2x(pg.image.load(os.path.join("C:\\Users\\u23505\\Documents\\GitHub\\pygame-estudos\\flappy-bird\\assets\\bird2.png"))),
+    pg.transform.scale2x(pg.image.load(os.path.join("C:\\Users\\u23505\\Documents\\GitHub\\pygame-estudos\\flappy-bird\\assets\\bird3.png")))
 ]
 
 pg.font.init()
@@ -27,6 +28,7 @@ class Passaro:
     ROTACAO_MAXIMA = 25
     VELOCIDADE_ROTACAO = 20
     TEMPO_ANIMACAO = 5
+    tela = ()
     
     # Configurações iniciais
     def __init__(self, x, y):
@@ -93,7 +95,7 @@ class Passaro:
         # Desenhar a imagem
         imagem_rotacionada = pg.transform.rotate(self.imagem, self.angulo)
 
-        posicao_centro_imagem = self.imagem.get_react(topleft=(self.x, self.y)).center
+        posicao_centro_imagem = self.imagem.get_rect(topleft=(self.x, self.y)).center
         retangulo = imagem_rotacionada.get_rect(center = posicao_centro_imagem)
 
         pg.tela.blit(imagem_rotacionada, retangulo.topleft)
@@ -119,7 +121,7 @@ class Cano:
 
     def definir_altura(self):
         self.altura = random.randrange(50, 450)
-        self.pos_topo = self.altura - self.CANO_TOPO.get_height
+        self.pos_topo = self.altura - self.CANO_TOPO.get_height()
         self.pos_base = self.altura + self.DISTANCIA
 
     def mover(self):
@@ -137,8 +139,8 @@ class Cano:
         distancia_topo = (self.x - passsaro.x, self.pos_topo - round(passsaro.y))
         distancia_base = (self.x - passsaro.x, self.pos_base - round(passsaro.y))
 
-        topo_ponto = passsaro.mask.overlap(base_mask,distancia_topo)
-        base_ponto = passsaro.mask.overlap(base_mask,distancia_base)
+        topo_ponto = passsaro.mask.overlap(base_mask, distancia_topo)
+        base_ponto = passsaro.mask.overlap(base_mask, distancia_base)
 
         # VERIFICAÇÃO
         if base_ponto or topo_ponto:
@@ -179,7 +181,7 @@ def desenhar_tela(tela, passaros, canos, chao, pontos):
     for cano in canos:
         cano.desenhar(tela)
     
-    texto = FONTE_PONTOS.render(f'Pontuação: {pontos}', 1, (255, 255, 255))
+    texto = FONT_PONTOS.render(f'Pontuação: {pontos}', 1, (255, 255, 255))
     tela.blit(texto, (TELA_LARGURA - 10 - texto.get_width(), 10))
     chao.desenhar(tela)
     pg.display.update()
@@ -189,7 +191,7 @@ def main():
     passaros = [Passaro(230, 350)]
     chao = Chao(730)
     canos = [Cano(700)]
-    tela = pg.display.set_mode(TELA_LARGURA, TELA_ALTURA)
+    tela = pg.display.set_mode([TELA_LARGURA, TELA_ALTURA])
     pontos = 0
     relogio = pg.time.Clock()
 
