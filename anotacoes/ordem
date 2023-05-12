@@ -1,0 +1,7 @@
+Ordem de criação de código em projetos pygame
+
+1 - Declaração das constantes (todas maiúsculas do início ao fim)
+
+2 - Criação das classes e objetos, com seus respectivos atributos e metódos.
+
+3 - 
