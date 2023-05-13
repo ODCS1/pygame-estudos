@@ -7,13 +7,13 @@ import random
 TELA_LARGURA = 500
 TELA_ALTURA = 800
 
-IMAGEM_CANO = pg.transform.scale2x(pg.image.load(os.path.join("C:\\Users\\u23505\\Documents\\GitHub\\pygame-estudos\\flappy-bird\\assets\\pipe.png")))
-IMAGEM_CHAO = pg.transform.scale2x(pg.image.load(os.path.join("C:\\Users\\u23505\\Documents\\GitHub\\pygame-estudos\\flappy-bird\\assets\\base.png")))
-IMAGEM_FUNDO = pg.transform.scale2x(pg.image.load(os.path.join("C:\\Users\\u23505\\Documents\\GitHub\\pygame-estudos\\flappy-bird\\assets\\bg.png")))
+IMAGEM_CANO = pg.transform.scale2x(pg.image.load(os.path.join('flappy-bird\\assets', 'pipe.png')))
+IMAGEM_CHAO = pg.transform.scale2x(pg.image.load(os.path.join('flappy-bird\\assets', 'base.png')))
+IMAGEM_FUNDO = pg.transform.scale2x(pg.image.load(os.path.join('flappy-bird\\assets', 'bg.png')))
 IMAGENS_PASSARO = [
-    pg.transform.scale2x(pg.image.load(os.path.join("C:\\Users\\u23505\\Documents\\GitHub\\pygame-estudos\\flappy-bird\\assets\\bird1.png"))),
-    pg.transform.scale2x(pg.image.load(os.path.join("C:\\Users\\u23505\\Documents\\GitHub\\pygame-estudos\\flappy-bird\\assets\\bird2.png"))),
-    pg.transform.scale2x(pg.image.load(os.path.join("C:\\Users\\u23505\\Documents\\GitHub\\pygame-estudos\\flappy-bird\\assets\\bird3.png")))
+    pg.transform.scale2x(pg.image.load(os.path.join('flappy-bird\\assets', 'bird1.png'))),
+    pg.transform.scale2x(pg.image.load(os.path.join('flappy-bird\\assets', 'bird2.png'))),
+    pg.transform.scale2x(pg.image.load(os.path.join('flappy-bird\\assets', 'bird3.png')))
 ]
 
 pg.font.init()
@@ -55,7 +55,7 @@ class Passaro:
         if deslocamento > 16:
             deslocamento = 16
         elif deslocamento < 0:
-            deslocamento -= -2
+            deslocamento -= 2
         
         # Definir a posição
         self.y = deslocamento
@@ -80,7 +80,7 @@ class Passaro:
             self.imagem = self.IMGS[2]
         elif self.contagem_imagem < self.TEMPO_ANIMACAO * 4:
             self.imagem = self.IMGS[1]
-        elif self.imagem < self.TEMPO_ANIMACAO + 1:
+        elif self.contagem_imagem < self.TEMPO_ANIMACAO + 1:
             self.imagem = self.IMGS[0]
             self.contagem_imagem = 0
 
@@ -97,7 +97,7 @@ class Passaro:
         posicao_centro_imagem = self.imagem.get_rect(topleft=(self.x, self.y)).center
         retangulo = imagem_rotacionada.get_rect(center = posicao_centro_imagem)
 
-        pg.tela.blit(imagem_rotacionada, retangulo.topleft)
+        tela.blit(imagem_rotacionada, retangulo.topleft)
          
     # Criar os pixels no retângulo do passáro
     def get_mask(self):
