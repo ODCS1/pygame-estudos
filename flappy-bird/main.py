@@ -28,7 +28,6 @@ class Passaro:
     ROTACAO_MAXIMA = 25
     VELOCIDADE_ROTACAO = 20
     TEMPO_ANIMACAO = 5
-    tela = ()
     
     # Configurações iniciais
     def __init__(self, x, y):
@@ -191,7 +190,7 @@ def main():
     passaros = [Passaro(230, 350)]
     chao = Chao(730)
     canos = [Cano(700)]
-    tela = pg.display.set_mode([TELA_LARGURA, TELA_ALTURA])
+    tela = pg.display.set_mode((TELA_LARGURA, TELA_ALTURA))
     pontos = 0
     relogio = pg.time.Clock()
 
@@ -231,7 +230,7 @@ def main():
             pontos += 1
             canos.append(Cano(600))
         for cano in remover_canos:
-            cano.remove(cano)
+            canos.remove(cano)
 
         # Caso saia do eixo Y
         for i, passaro in enumerate(passaros):
