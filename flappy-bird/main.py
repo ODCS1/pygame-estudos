@@ -4,7 +4,7 @@ import random
 
 
 # Criação das constantes
-TELA_LARGURA = 500
+TELA_LARGURA = 800
 TELA_ALTURA = 800
 
 IMAGEM_CANO = pg.transform.scale2x(pg.image.load(os.path.join('flappy-bird\\assets', 'pipe.png')))
@@ -17,7 +17,7 @@ IMAGENS_PASSARO = [
 ]
 
 pg.font.init()
-FONT_PONTOS = pg.font.SysFont('arial', 50)
+FONTE_PONTOS = pg.font.SysFont('arial', 50)
 
 
 # Criando as classes
@@ -49,7 +49,7 @@ class Passaro:
         # Calcular o deslocamento
         self.tempo += 1
         # Equação horária do espaço M.U.V.
-        deslocamento = (1.5 * self.tempo) + (self.velocidade * self.tempo)
+        deslocamento = (1.5 * self.tempo**2) + (self.velocidade * self.tempo)
 
         # Restringir o deslocamento
         if deslocamento > 16:
@@ -131,15 +131,15 @@ class Cano:
         tela.blit(self.CANO_BASE, (self.x, self.pos_base))
 
     def colidir(self, passsaro):
-        passsaro.mask = passsaro.get_mask()
+        passsaro_mask = passsaro.get_mask()
         topo_mask = pg.mask.from_surface(self.CANO_TOPO)
         base_mask = pg.mask.from_surface(self.CANO_BASE)
 
         distancia_topo = (self.x - passsaro.x, self.pos_topo - round(passsaro.y))
         distancia_base = (self.x - passsaro.x, self.pos_base - round(passsaro.y))
 
-        topo_ponto = passsaro.mask.overlap(base_mask, distancia_topo)
-        base_ponto = passsaro.mask.overlap(base_mask, distancia_base)
+        topo_ponto = passsaro_mask.overlap(topo_mask, distancia_topo)
+        base_ponto = passsaro_mask.overlap(base_mask, distancia_base)
 
         # VERIFICAÇÃO
         if base_ponto or topo_ponto:
@@ -180,7 +180,7 @@ def desenhar_tela(tela, passaros, canos, chao, pontos):
     for cano in canos:
         cano.desenhar(tela)
     
-    texto = FONT_PONTOS.render(f'Pontuação: {pontos}', 1, (255, 255, 255))
+    texto = FONTE_PONTOS.render(f'Pontuação: {pontos}', 1, (255, 255, 255))
     tela.blit(texto, (TELA_LARGURA - 10 - texto.get_width(), 10))
     chao.desenhar(tela)
     pg.display.update()
