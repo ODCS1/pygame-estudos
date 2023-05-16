@@ -4,7 +4,7 @@ import random
 
 
 # Criação das constantes
-TELA_LARGURA = 800
+TELA_LARGURA = 500
 TELA_ALTURA = 800
 
 IMAGEM_CANO = pg.transform.scale2x(pg.image.load(os.path.join('flappy-bird\\assets', 'pipe.png')))
