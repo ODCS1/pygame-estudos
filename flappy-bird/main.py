@@ -94,8 +94,7 @@ class Passaro:
         # Desenhar a imagem
         imagem_rotacionada = pg.transform.rotate(self.imagem, self.angulo)
 
-        posicao_centro_imagem = self.imagem.get_rect(topleft=(self.x, self.y)).center
-        retangulo = imagem_rotacionada.get_rect(center = posicao_centro_imagem)
+        retangulo = imagem_rotacionada.get_rect(center = pos_centro_imagem)
 
         tela.blit(imagem_rotacionada, retangulo.topleft)
          
