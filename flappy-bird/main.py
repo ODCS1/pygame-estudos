@@ -58,10 +58,10 @@ class Passaro:
             deslocamento -= 2
         
         # Definir a posição
-        self.y = deslocamento
+        self.y += deslocamento
 
         # Ângulo do passáro
-        if deslocamento < 0 or self.y < (self.altura + 50):
+        if deslocamento < 0:
           if self.angulo < self.ROTACAO_MAXIMA:
               self.angulo = self.ROTACAO_MAXIMA
           else:
